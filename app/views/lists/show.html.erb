@@ -1,19 +1,33 @@
-<div class="banner" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url();">
+<div class="banner" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url(https://images.unsplash.com/photo-1585647347483-22b66260dfff?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80);">
   <div class="container">
     <h1><%= @list.name %></h1>
-    <p></p><%= @list.movies.count %> movies</p>
+    <p><%= @list.movies.count %> movies</p>
   </div>
 </div>
 
+<div class="buttons-div">
+  <%= link_to new_list_bookmark_path(@list) do %>
+    <i class="fa fa-plus"></i> Add a new bookmark
+  <% end %>
 
-<% @list.bookmarks.each do |bookmark| %>
-  <img src="<%= bookmark.movie.poster_url %>"/>
-    <h2><%= bookmark.movie.title %></h2>
-    <p><%= bookmark.movie.overview %></p>
-    <p class="card-movie-rating">Rating: <%= bookmark.movie.rating %></>
-    <%= link_to "Delete movie", bookmark_path(bookmark), method: :delete, data: { confirm: "Are you sure?" } %>
-<% end %>
+  <%= link_to root_path do %>
+    <i class="fa fa-house-user"></i> Go to home page
+  <% end %>
+</div>
 
-<%= link_to new_list_bookmark_path(@list) do %>
-  <i class="fa fa-plus"></i> Add a new bookmark
-<% end %>
+<div class="row">
+  <% @list.bookmarks.each do |bookmark| %>
+  <div class="card" style="width: 18rem;">
+    <img src="<%= bookmark.movie.poster_url %>" class="card-img-top" alt="Film poster">
+  <div class="card-body">
+    <h5 class="card-title"><%= bookmark.movie.title %></h5>
+    <p class="card-text"><%= bookmark.movie.overview %></p>
+  </div>
+    <div class="card-body">
+      <p class="card-text"><%= bookmark.comment %></p>
+      <a href="#" class="card-link"><%= link_to "Delete movie", bookmark_path(bookmark), method: :delete, data: { confirm: "Are you sure?" } %></a>
+      <p class="card-text">Rating: <%= bookmark.movie.rating %></p>
+    </div>
+  </div>
+  <% end %>
+</div>

@@ -10,6 +10,19 @@
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
     <body>
+
+<nav class="navbar navbar-light bg-light">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="<% link_to root_path %>">
+      <img src="https://cdn-icons-png.flaticon.com/512/195/195158.png" alt="Icon of popcorn" width="30" height="30">
+    </a>
+    <form class="d-flex">
+      <button class="btn btn-sm btn-outline-secondary" type="button"><%= link_to "My lists", root_path %></button>
+      <button class="btn btn-sm btn-outline-secondary" type="button"><%= link_to "New list", new_list_path %></button>
+    </form>
+  </div>
+</nav>
+
     <%= yield %>
   </body>
 </html>
